@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 const SignInForm = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -20,6 +20,7 @@ const SignInForm = () => {
       },
     })
       .then((res) => {
+        console.log(res);
         if (res.data.errors) {
           emailError.innerHTML = res.data.errors.email;
           passwordError.innerHTML = res.data.errors.password;
@@ -31,6 +32,7 @@ const SignInForm = () => {
         console.log(err);
       });
   };
+
   return (
     <form action="" onSubmit={handleLogin} id="sign-up-form">
       <label htmlFor="email">Email</label>

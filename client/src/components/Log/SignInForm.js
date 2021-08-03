@@ -7,7 +7,20 @@ const SignInForm = () => {
 
   const handleLogin = (e) => {};
 
-  return <form action="" onSubmit={handleLogin} id="sign-up-form"></form>;
+  return (
+    <form action="" onSubmit={handleLogin} id="sign-up-form">
+      <label htmlFor="email">Email</label>
+      <br />
+      <input
+        type="text"
+        name="email"
+        id="email"
+        onChange={(e) => setEmail(e.target.value)}
+        value={email}
+      />
+      <input type="submit" value="Se connecter" />
+    </form>
+  );
 };
 
 export default SignInForm;

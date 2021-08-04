@@ -47,11 +47,7 @@ export const updateBio = (userId, bio) => {
       data: { bio },
     })
       .then((res) => {
-        //dispatch vers reducers/user.reducer.js
-        dispatch({
-          type: UPDATE_BIO,
-          payload: bio,
-        });
+        dispatch({ type: UPDATE_BIO, payload: bio });
       })
       .catch((err) => console.log(err));
   };
@@ -65,14 +61,12 @@ export const followUser = (followerId, idToFollow) => {
       data: { idToFollow },
     })
       .then((res) => {
-        dispatch({
-          type: FOLLOW_USER,
-          payload: { idToFollow },
-        });
+        dispatch({ type: FOLLOW_USER, payload: { idToFollow } });
       })
       .catch((err) => console.log(err));
   };
 };
+
 export const unfollowUser = (followerId, idToUnfollow) => {
   return (dispatch) => {
     return axios({
@@ -81,10 +75,7 @@ export const unfollowUser = (followerId, idToUnfollow) => {
       data: { idToUnfollow },
     })
       .then((res) => {
-        dispatch({
-          type: UNFOLLOW_USER,
-          payload: { idToUnfollow },
-        });
+        dispatch({ type: UNFOLLOW_USER, payload: { idToUnfollow } });
       })
       .catch((err) => console.log(err));
   };

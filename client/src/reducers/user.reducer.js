@@ -1,9 +1,9 @@
 import {
-  GET_USER,
-  UPLOAD_PICTURE,
-  UPDATE_BIO,
   FOLLOW_USER,
+  GET_USER,
   UNFOLLOW_USER,
+  UPDATE_BIO,
+  UPLOAD_PICTURE,
 } from "../actions/user.actions";
 
 const initialState = {};
@@ -14,7 +14,7 @@ export default function userReducer(state = initialState, action) {
       return action.payload;
     case UPLOAD_PICTURE:
       return {
-        ...state, //on récupère les données utilisateur sans les écraser
+        ...state,
         picture: action.payload,
       };
     case UPDATE_BIO:

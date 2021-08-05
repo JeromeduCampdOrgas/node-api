@@ -6,16 +6,30 @@ import { isEmpty } from "./utils";
 
 const Thread = () => {
   const [loadPost, setLoadPost] = useState(true);
+  const [count, setCount] = useState(5);
   const dispatch = useDispatch();
 
   const posts = useSelector((state) => state.postReducer);
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >
+      document.scrollingElement.scrollHeight
+    ) {
+      setLoadPost(true);
+    }
+  };
 
   useEffect(() => {
     if (loadPost) {
-      dispatch(getPosts());
+      dispatch(getPosts(count));
       setLoadPost(false);
+      setCount(count + 5);
     }
-  }, [loadPost, dispatch]); //une fois la fonction "jouée", on la rejoue => []
+    window.addEventListener("scroll", loadMore);
+    return () => {
+      window.removeEventListener("scroll", loadMore);
+    };
+  }, [loadPost, dispatch, count]); //une fois la fonction "jouée", on la rejoue => []
 
   return (
     <div className="thread-container">

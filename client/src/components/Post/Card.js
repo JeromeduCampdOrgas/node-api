@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import FollowHandler from "../Profil/FollowHandler";
 import { dateParser, isEmpty } from "../utils";
+import LikeButton from "./LikeButton";
 
 const Card = ({ post }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,6 @@ const Card = ({ post }) => {
                 usersData
                   .map((user) => {
                     if (user._id === post.posterId) {
-                      console.log(user.picture);
                       return user.picture;
                     }
                   })
@@ -71,7 +71,9 @@ const Card = ({ post }) => {
                 <img src="./img/icons/message1.svg" alt="comment" />
                 <span>{post.comments.length}</span>
               </div>
-              }
+              <LikeButton post={post} />
+
+              <img src="./img/icons/share.svg" alt="share" />
             </div>
           </div>
         </>

@@ -8,8 +8,8 @@ const Thread = () => {
   const [loadPost, setLoadPost] = useState(true);
   const [count, setCount] = useState(5);
   const dispatch = useDispatch();
-
   const posts = useSelector((state) => state.postReducer);
+
   const loadMore = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop + 1 >
@@ -25,18 +25,17 @@ const Thread = () => {
       setLoadPost(false);
       setCount(count + 5);
     }
+
     window.addEventListener("scroll", loadMore);
-    return () => {
-      window.removeEventListener("scroll", loadMore);
-    };
-  }, [loadPost, dispatch, count]); //une fois la fonction "jouée", on la rejoue => []
+    return () => window.removeEventListener("scroll", loadMore);
+  }, [loadPost, dispatch, count]);
 
   return (
     <div className="thread-container">
       <ul>
         {!isEmpty(posts[0]) &&
           posts.map((post) => {
-            return <Card post={post} key={post.id} />;
+            return <Card post={post} key={post._id} />;
           })}
       </ul>
     </div>

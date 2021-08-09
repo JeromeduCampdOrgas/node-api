@@ -1,12 +1,12 @@
-import React, { useEffect } from "react";
-import { UidContext } from "./components/AppContext";
+import React, { useEffect, useState } from "react";
 import Routes from "./components/Routes";
+import { UidContext } from "./components/AppContext";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { getUser } from "./actions/user.actions";
 
 const App = () => {
-  const [uid, setUid] = React.useState(null);
+  const [uid, setUid] = useState(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,8 +16,10 @@ const App = () => {
         url: `${process.env.REACT_APP_API_URL}jwtid`,
         withCredentials: true,
       })
-        .then((res) => setUid(res.data))
-        .catch((err) => console.log("No Token"));
+        .then((res) => {
+          setUid(res.data);
+        })
+        .catch((err) => console.log("No token"));
     };
     fetchToken();
 

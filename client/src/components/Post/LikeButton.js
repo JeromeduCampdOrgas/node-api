@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UidContext } from "../AppContext";
 import Popup from "reactjs-popup";
-import "reactjs-popup/dist/index.css"; //livré avec reactjs-popup
+import "reactjs-popup/dist/index.css";
 import { useDispatch } from "react-redux";
 import { likePost, unlikePost } from "../../actions/post.actions";
 
@@ -21,13 +21,9 @@ const LikeButton = ({ post }) => {
   };
 
   useEffect(() => {
-    if (post.likers.includes(uid)) {
-      //si l'uid est présent dans le tableau des personnes qui ont liké
-      setLiked(true);
-    } else {
-      setLiked(false);
-    }
-  }, [uid, post.likers, liked]); //on relance le useEffect quand on a le uidd
+    if (post.likers.includes(uid)) setLiked(true);
+    else setLiked(false);
+  }, [uid, post.likers, liked]);
 
   return (
     <div className="like-container">
@@ -43,7 +39,7 @@ const LikeButton = ({ post }) => {
       {uid && liked === false && (
         <img src="./img/icons/heart.svg" onClick={like} alt="like" />
       )}
-      {uid && liked === true && (
+      {uid && liked && (
         <img src="./img/icons/heart-filled.svg" onClick={unlike} alt="unlike" />
       )}
       <span>{post.likers.length}</span>
